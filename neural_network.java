@@ -18,7 +18,10 @@ public class neural_network{
     public static void main(String[] args){
         neural_network nn = new neural_network();
         double z = nn.weighths[0]*nn.x[0] + nn.weighths[1]*nn.x[1] + nn.bias ;
-        int expected_output = 1;
-
+        int expected_output = 1;//target value
+        double pred = nn.sigmoid(z);
+        System.out.println("The prediction is "+pred);//predicted value
+        nn.loss = expected_output-pred;
+        System.out.println("The loss is "+nn.loss);
     }
 }
