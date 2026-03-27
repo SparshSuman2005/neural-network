@@ -7,7 +7,7 @@ public class neural_network{
     static double[] x = {4.0,5.0};//inputs
     double[] weighths={3.0,3.0};//weights 
     double bias = 1.0;
-    double loss ;
+    double error ;
 
     //activation function
     public double  sigmoid (double z){
@@ -25,15 +25,17 @@ public class neural_network{
         int expected_output = 1;//target value
         double pred = nn.sigmoid(z);
         System.out.println("The prediction is "+pred);//predicted value
-        nn.loss = expected_output-pred;
-        System.out.println("The loss is "+nn.loss);
+        nn.error = expected_output-pred;
+        System.out.println("The loss is "+nn.error);
+
+        double sensitivity = pred*(1-pred);
 
 
         for(int i = 0 ; i <= nn.weighths.length-1 ; i++){
-            nn.weighths[i] = nn.weighths[i]+(nn.loss*nn.x[i]*lr);
+            nn.weighths[i] = nn.weighths[i]+(nn.error*nn.x[i]*lr*sensitivity);
         }
 
-        if(nn.loss<Math.pow(10,-5)){
+        if(nn.error<Math.pow(10,-5)){
             flag = false;
         }
         count++;
