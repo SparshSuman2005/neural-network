@@ -19,6 +19,7 @@ public class neural_network{
     public static void main(String[] args){
         neural_network nn = new neural_network();
         boolean flag = true;
+        int count = 0;
         while(flag){
         double z = nn.weighths[0]*nn.x[0] + nn.weighths[1]*nn.x[1] + nn.bias ;
         int expected_output = 1;//target value
@@ -34,6 +35,10 @@ public class neural_network{
 
         if(nn.loss<Math.pow(10,-5)){
             flag = false;
+        }
+        count++;
+        if(count >= 200){
+            break;
         }
     }
     }
