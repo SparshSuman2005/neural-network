@@ -25,17 +25,18 @@ public class neural_network{
         int expected_output = 1;//target value
         double pred = nn.sigmoid(z);
         System.out.println("The prediction is "+pred);//predicted value
-        nn.error = expected_output-pred;
+        nn.error =pred - expected_output;
         System.out.println("The loss is "+nn.error);
 
         double sensitivity = pred*(1-pred);
 
 
         for(int i = 0 ; i <= nn.weighths.length-1 ; i++){
-            nn.weighths[i] = nn.weighths[i]+(nn.error*nn.x[i]*lr*sensitivity);
+            nn.weighths[i] = nn.weighths[i]-(nn.error*nn.x[i]*lr*sensitivity);
         }
+        nn.bias = nn.bias - (nn.error*lr*sensitivity);
 
-        if(nn.error<Math.pow(10,-5)){
+        if(Math.abs(nn.error)<Math.pow(10,-5)){
             flag = false;
         }
         count++;
