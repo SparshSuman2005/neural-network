@@ -1,9 +1,9 @@
 //author@Sparsh
 
-public class matrixutilities {
+public class Matrixutilities {
 
 
-    public double[][] matmul(double[][] a , double[][] b){
+    public static double[][] matmul(double[][] a , double[][] b){
 
         if(a[0].length != b.length){
             System.out.println("dimensions incomaptible !");
@@ -35,7 +35,7 @@ public class matrixutilities {
 
 
 
-    public double[][] transpose(double[][] a){
+    public static double[][] transpose(double[][] a){
         int row = a[0].length;
         int col = a.length;
 
@@ -54,7 +54,7 @@ public class matrixutilities {
 
 
 
-    public double[][] consmul(double[][] a , double k){
+    public static double[][] consmul(double[][] a , double k){
         int row = a.length;
         int col = a[0].length;
 
@@ -71,23 +71,8 @@ public class matrixutilities {
     } 
 
 
-
-
-    public double[][] initialize(int n , int m ){
-        double[][] r = new double[n][m];
-
-        for (int i = 0 ; i < n ; i++){
-            for(int j = 0 ; j < m ; j++){
-                r[i][j] = Math.random();
-            }
-        }
-
-        return r ;
-    }
-
-
-
-    public double[][] hadamard(double[][] a , double [][] b){
+    
+    public static double[][] hadamard(double[][] a , double [][] b){
         int m = a.length;
         int n = a[0].length;
 
@@ -109,7 +94,7 @@ public class matrixutilities {
     }
 
 
-    public double[][] add(double[][] a , double [][] b){
+    public static double[][] add(double[][] a , double [][] b){
         int m = a.length;
         int n = a[0].length;
 
@@ -130,7 +115,7 @@ public class matrixutilities {
     }
 
 
-    public double[][] substract(double[][] a , double [][] b){
+    public static double[][] substract(double[][] a , double [][] b){
         int m = a.length;
         int n = a[0].length;
 
@@ -151,7 +136,7 @@ public class matrixutilities {
     }
 
 
-    public void print(double[][] a ){
+    public static void print(double[][] a ){
         int m = a.length;
         int n = a[0].length;
 
@@ -164,14 +149,14 @@ public class matrixutilities {
     }
 
 
-    public double[][] map(double[][] a){
+    public static double[][] map(double[][] a){
         int m = a.length;
         int n = a[0].length;
 
        
             for(int i = 0 ; i < m ; i++){
                 for(int j =0 ; j< n ; j++){
-                    a[i][j] = sigmoid(a[i][j]);
+                    a[i][j] = Activations.sigmoid(a[i][j]);
                 }
             }
         
@@ -181,6 +166,26 @@ public class matrixutilities {
 
 
 
+
+    public static int[] dim(double[][] x){
+        int[] a = {x[0].length,x.length};
+        return a ;
+    }
+
+
+
+    public static double[][] mapsigmoidderivative(double[][] var1) {
+      int var2 = var1.length;
+      int var3 = var1[0].length;
+
+      for(int var4 = 0; var4 < var2; ++var4) {
+         for(int var5 = 0; var5 < var3; ++var5) {
+            var1[var4][var5] = Activations.sigmoidderivation(var1[var4][var5]);
+         }
+      }
+
+      return var1;
+   }
 
 
 }
