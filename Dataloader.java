@@ -1,14 +1,17 @@
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 
 public class Dataloader {
 
-    public static void main(String[] args) throws IOException {
+     public static ArrayList<Samplecontainer> samples = new ArrayList<>();
 
-        DataInputStream images = new DataInputStream(
+     public static void loaddata()throws IOException{
+        samples.clear();
+         DataInputStream images = new DataInputStream(
             new FileInputStream("archive/train-images-idx3-ubyte/train-images-idx3-ubyte")
         );
 
@@ -19,6 +22,8 @@ public class Dataloader {
 
 
         double[][][] x = new double[numberofimages][rows*cols][1];
+
+        System.out.println("Images");
 
         
 
@@ -35,6 +40,8 @@ public class Dataloader {
         }
     }
         images.close(); 
+
+        System.out.println("Labels");
 
 
 
@@ -63,9 +70,10 @@ public class Dataloader {
         System.out.println(y_[0]);
         System.out.println(y_[1]);
 
-        System.out.println(x[0][0][0]);
-        System.out.println(x[0][1][0]);
-        System.out.println(x[0][2][0]);
+        System.out.println("One-hot");
+
+
+
 
 
         //one-hot encoding
@@ -78,17 +86,27 @@ public class Dataloader {
            y[i][digit][0] = 1.0;
         }
 
-        System.out.println(y[0][0][0]);
-        System.out.println(y[0][1][0]);
-        System.out.println(y[0][2][0]);
-        System.out.println(y[0][3][0]);
-        System.out.println(y[0][4][0]);
-        System.out.println(y[0][5][0]);
-        System.out.println(y[0][6][0]);
-        System.out.println(y[0][7][0]);
-        System.out.println(y[0][8][0]);
-        System.out.println(y[0][9][0]);
+        Samplecontainer[] sample = new Samplecontainer[numberofimages];
 
+        System.out.println("container");
+
+        
+
+        for(int i = 0 ; i < numberofimages ; i++){
+            sample[i] = new Samplecontainer(x[i],y[i]);
+            samples.add(sample[i]);
+        }
+
+
+     }
+
+    public static void main(String[] args) throws IOException {
+
+        loaddata();
+
+        
+        Matrixutilities.print(samples.get(10).image);
+        Matrixutilities.print(samples.get(10).label);
 
 
 

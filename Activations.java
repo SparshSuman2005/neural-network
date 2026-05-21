@@ -7,7 +7,7 @@ public class Activations {
     public static double sigmoid(double a){
         double b;
 
-        b = 1/(1-Math.exp(-a));
+        b = 1/(1+Math.exp(-a));
         return b;
     }
 

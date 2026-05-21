@@ -58,15 +58,17 @@ public class Matrixutilities {
         int row = a.length;
         int col = a[0].length;
 
+        double[][] var = new double[row][col];
+
 
         for (int i = 0 ; i < row ; i++){
             for(int j = 0 ; j < col ; j++){
-                a[i][j] = k*a[i][j];
+                var[i][j] = k*a[i][j];
             }
         }
 
 
-        return a ;
+        return var ;
 
     } 
 
@@ -153,15 +155,17 @@ public class Matrixutilities {
         int m = a.length;
         int n = a[0].length;
 
+        double[][] var = new double[m][n];
+
        
             for(int i = 0 ; i < m ; i++){
                 for(int j =0 ; j< n ; j++){
-                    a[i][j] = Activations.sigmoid(a[i][j]);
+                    var[i][j] = Activations.sigmoid(a[i][j]);
                 }
             }
         
 
-        return a ;
+        return var ;
     }
 
 
@@ -178,13 +182,15 @@ public class Matrixutilities {
       int var2 = var1.length;
       int var3 = var1[0].length;
 
+      double[][] var = new double[var2][var3];
+
       for(int var4 = 0; var4 < var2; ++var4) {
          for(int var5 = 0; var5 < var3; ++var5) {
-            var1[var4][var5] = Activations.sigmoidderivation(var1[var4][var5]);
+            var[var4][var5] = Activations.sigmoidderivation(var1[var4][var5]);
          }
       }
 
-      return var1;
+      return var;
    }
 
 
