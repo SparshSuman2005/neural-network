@@ -46,7 +46,7 @@ public class Layers {
 
     public void backpropagate_initial(double[][] Y ){
      
-        this.dz =Matrixutilities.matmul( Matrixutilities.substract(A, Y)  , Matrixutilities.mapsigmoidderivative(z));
+        this.dz = Matrixutilities.substract(A, Y)  ;
         this.dw=Matrixutilities.matmul(dz, Matrixutilities.transpose(this.A_prev));
         this.db = dz;
         
@@ -56,7 +56,7 @@ public class Layers {
 
     public void update(){
 
-        double lr = 0.1;
+        double lr = 0.01;
 
 
         this.w = Matrixutilities.substract(this.w, Matrixutilities.consmul(this.dw, lr));
