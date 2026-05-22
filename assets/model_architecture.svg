@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="260" viewBox="0 0 980 260">
+  <rect width="980" height="260" fill="#ffffff"/>
+  <style>
+    .box { fill: #f7f9fc; stroke: #263238; stroke-width: 2; rx: 8; }
+    .title { font: 700 18px Arial, sans-serif; fill: #111827; }
+    .text { font: 14px Arial, sans-serif; fill: #374151; }
+    .arrow { stroke: #2563eb; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+  </style>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <text x="490" y="34" text-anchor="middle" class="title">Java Neural Network Architecture</text>
+
+  <rect x="30" y="80" width="140" height="95" class="box"/>
+  <text x="100" y="114" text-anchor="middle" class="title">Input</text>
+  <text x="100" y="142" text-anchor="middle" class="text">28 x 28 image</text>
+  <text x="100" y="162" text-anchor="middle" class="text">784 x 1 vector</text>
+
+  <rect x="220" y="80" width="140" height="95" class="box"/>
+  <text x="290" y="114" text-anchor="middle" class="title">Layer 1</text>
+  <text x="290" y="142" text-anchor="middle" class="text">128 neurons</text>
+  <text x="290" y="162" text-anchor="middle" class="text">Sigmoid</text>
+
+  <rect x="410" y="80" width="140" height="95" class="box"/>
+  <text x="480" y="114" text-anchor="middle" class="title">Layer 2</text>
+  <text x="480" y="142" text-anchor="middle" class="text">64 neurons</text>
+  <text x="480" y="162" text-anchor="middle" class="text">Sigmoid</text>
+
+  <rect x="600" y="80" width="140" height="95" class="box"/>
+  <text x="670" y="114" text-anchor="middle" class="title">Layer 3</text>
+  <text x="670" y="142" text-anchor="middle" class="text">32 neurons</text>
+  <text x="670" y="162" text-anchor="middle" class="text">Sigmoid</text>
+
+  <rect x="790" y="80" width="140" height="95" class="box"/>
+  <text x="860" y="114" text-anchor="middle" class="title">Output</text>
+  <text x="860" y="142" text-anchor="middle" class="text">10 neurons</text>
+  <text x="860" y="162" text-anchor="middle" class="text">Digit 0-9</text>
+
+  <path d="M170 127 L220 127" class="arrow"/>
+  <path d="M360 127 L410 127" class="arrow"/>
+  <path d="M550 127 L600 127" class="arrow"/>
+  <path d="M740 127 L790 127" class="arrow"/>
+
+  <text x="490" y="220" text-anchor="middle" class="text">Forward pass: Z = W.A_prev + b, A = sigmoid(Z)</text>
+</svg>
