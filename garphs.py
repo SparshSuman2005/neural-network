@@ -1,54 +1,64 @@
+
 import matplotlib.pyplot as plt
 import numpy as np
 
-# =========================
-# DATA
-# =========================
+epochs = np.array([1, 2, 3, 4, 5])
 
-epochs = [1, 2, 3, 4, 5]
-
-# Java NN
-java_cost = [
+java_cost = np.array([
     1.3857,
     0.4402,
     0.2942,
     0.2252,
     0.1835
-]
+])
 
-java_accuracy = [
+java_accuracy = np.array([
     0.7216,
     0.9308,
     0.9537,
     0.9653,
     0.9719
-]
+])
 
-# Python NN
-python_loss = [
+python_loss = np.array([
     0.3249,
     0.2845,
     0.1966,
     0.1411,
     0.1080
-]
+])
 
-python_accuracy = [
+python_accuracy = np.array([
     0.1465,
     0.3948,
     0.6229,
     0.7780,
     0.8448
-]
+])
 
-# =========================
-# 1. EPOCH vs COST/LOSS
-# =========================
+smooth_x = np.linspace(epochs.min(), epochs.max(), 300)
 
-plt.figure(figsize=(8,5))
+java_curve = np.poly1d(np.polyfit(epochs, java_cost, 3))
+python_curve = np.poly1d(np.polyfit(epochs, python_loss, 3))
 
-plt.plot(epochs, java_cost, marker='o', label='Java NN')
-plt.plot(epochs, python_loss, marker='o', label='Python NN')
+plt.figure(figsize=(10,6))
+
+plt.plot(
+    smooth_x,
+    java_curve(smooth_x),
+    linewidth=3,
+    label="Java NN Cost"
+)
+
+plt.plot(
+    smooth_x,
+    python_curve(smooth_x),
+    linewidth=3,
+    label="Python NN Loss"
+)
+
+plt.scatter(epochs, java_cost, s=80)
+plt.scatter(epochs, python_loss, s=80)
 
 plt.xlabel("Epoch")
 plt.ylabel("Cost / Loss")
@@ -57,16 +67,34 @@ plt.title("Epoch vs Cost/Loss")
 plt.legend()
 plt.grid(True)
 
+plt.xlim(left=0)
+plt.ylim(bottom=0)
+
 plt.show()
 
-# =========================
-# 2. EPOCH vs ACCURACY
-# =========================
+smooth_x2 = np.linspace(epochs.min(), epochs.max(), 300)
 
-plt.figure(figsize=(8,5))
+java_acc_curve = np.poly1d(np.polyfit(epochs, java_accuracy, 3))
+python_acc_curve = np.poly1d(np.polyfit(epochs, python_accuracy, 3))
 
-plt.plot(epochs, java_accuracy, marker='o', label='Java NN')
-plt.plot(epochs, python_accuracy, marker='o', label='Python NN')
+plt.figure(figsize=(10,6))
+
+plt.plot(
+    smooth_x2,
+    java_acc_curve(smooth_x2),
+    linewidth=3,
+    label="Java NN Accuracy"
+)
+
+plt.plot(
+    smooth_x2,
+    python_acc_curve(smooth_x2),
+    linewidth=3,
+    label="Python NN Accuracy"
+)
+
+plt.scatter(epochs, java_accuracy, s=80)
+plt.scatter(epochs, python_accuracy, s=80)
 
 plt.xlabel("Epoch")
 plt.ylabel("Accuracy")
@@ -75,12 +103,10 @@ plt.title("Epoch vs Accuracy")
 plt.legend()
 plt.grid(True)
 
-plt.show()
+plt.xlim(left=0)
+plt.ylim(bottom=0)
 
-# =========================
-# 3. CONFUSION MATRIX
-# JAVA NN ONLY
-# =========================
+plt.show()
 
 confusion_matrix = np.array([
     [970, 0,   1,  1,  1,  2,  1,  1,  3,  0],
@@ -111,7 +137,6 @@ plt.ylabel("Actual Label")
 
 plt.title("Java Neural Network Confusion Matrix")
 
-# writing values inside cells
 for i in range(10):
     for j in range(10):
         plt.text(
