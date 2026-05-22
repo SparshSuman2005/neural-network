@@ -3,6 +3,8 @@ import java.util.Collections;
 
 public class Neuralnetwork {
 
+    static Layers[] l = new Layers[4];
+
 
 
     public static double bce(double[][] yHat, double[][] y) {
@@ -41,7 +43,7 @@ public static int argmax(double[][] a) {
 
         Dataloader.loaddata();
 
-        Layers[] l = new Layers[4];
+        
 
         l[0] = new Layers(128, 784);
         l[1] = new Layers(64,128);
@@ -49,7 +51,7 @@ public static int argmax(double[][] a) {
         l[3] = new Layers(10, 32);
 
 
-        for(int j = 0  ; j < 10 ; j++){
+        for(int j = 0  ; j < 5 ; j++){
 
             double totalloss = 0.0 ;
             int correct = 0;
@@ -99,12 +101,86 @@ public static int argmax(double[][] a) {
         }
 
 
+        Dataloader.loadtestdata();
+        int correct = 0;
+        int[][] confusionMatrix = new int[10][10];
+
+         for(int i = 0 ; i < Dataloader.samples.size() ; i++){
+
+
+                l[0].forward(Dataloader.samples.get(i).image);
+                l[1].forward(l[0].A);
+                l[2].forward(l[1].A);
+                l[3].forward(l[2].A);
+
+
+                int predicted = argmax(l[3].A);
+            int actual = argmax(Dataloader.samples.get(i).label);
+
+            confusionMatrix[actual][predicted]++;
+
+            if (predicted == actual) {
+                correct++;
+            }
+        }
+
+        double accuracy = (double) correct / Dataloader.samples.size();
+
+        System.out.println();
+        System.out.println("Test accuracy : " + accuracy);
+        System.out.println("Correct : " + correct + " / " + Dataloader.samples.size());
+        System.out.println();
+        System.out.println("Confusion Matrix");
+        System.out.println("Rows = actual labels, Columns = predicted labels");
+
+        System.out.print("      ");
+        for (int i = 0; i < 10; i++) {
+            System.out.printf("%5d", i);
+        }
+        System.out.println();
+
+        for (int actual = 0; actual < 10; actual++) {
+            System.out.printf("%5d ", actual);
+            for (int predicted = 0; predicted < 10; predicted++) {
+                System.out.printf("%5d", confusionMatrix[actual][predicted]);
+            }
+            System.out.println();
+        }
+
+        System.out.println();
+        System.out.println("Digit    TP      FP      TN      FN");
+
+        for (int digit = 0; digit < 10; digit++) {
+            int tp = confusionMatrix[digit][digit];
+            int fp = 0;
+            int fn = 0;
+
+            for (int i = 0; i < 10; i++) {
+                if (i != digit) {
+                    fp += confusionMatrix[i][digit];
+                    fn += confusionMatrix[digit][i];
+                }
+            }
+
+            int tn = Dataloader.samples.size() - tp - fp - fn;
+
+            System.out.printf("%5d %6d %7d %7d %7d%n", digit, tp, fp, tn, fn);
+        }
+    }
 
 
 
 
 
         
-    }
-    
+
+
+
+
+
+
+
+        
 }
+    
+
