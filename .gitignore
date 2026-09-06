@@ -1,0 +1,11 @@
+*.class
+
+__pycache__/
+*.py[cod]
+
+.venv/
+venv/
+env/
+
+archive/
+
